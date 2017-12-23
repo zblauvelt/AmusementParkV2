@@ -9,31 +9,31 @@
 import Foundation
 
 enum EntrantType: String {
-    case classicGuest
-    case vipGuest
-    case freeChild
-    case foodService
-    case rideService
-    case maintenance
-    case manager
+    case classicGuest = "Classic Guest"
+    case vipGuest = "VIP Guest"
+    case freeChild = "Free Child"
+    case foodService = "Food Service Employee"
+    case rideService = "Ride Service Employee"
+    case maintenance = "Maintenance Employee"
+    case manager = "Park Manager"
 }
 
 enum AreaAccess: String {
-    case amusementPark
-    case kitchen
-    case rideControl
-    case maintenance
-    case officeArea
+    case amusementPark = "Amusement Park"
+    case kitchen = "Kitchen"
+    case rideControl = "Ride Control"
+    case maintenance = "Maintenance"
+    case officeArea = "Office Area"
 }
 
 enum RideAccess: String {
-    case allRides
-    case skipAllLines
+    case allRides = "Access to All Rides"
+    case skipAllLines = "Skip All Lines"
 }
 
 enum Discount {
-    case food(Int)
-    case merchandise(Int)
+    case food
+    case merchandise
 }
 
 enum GuestError: Error {
@@ -50,16 +50,11 @@ protocol Guest {
     var entrantType: EntrantType { get }
     var areaAccess: [AreaAccess] { get }
     var rideAccess: [RideAccess] { get }
-    var discount: [Discount] { get }
+    var foodDiscount: Int { get }
+    var merchandiseDiscount: Int { get }
     
-    func createPass() throws -> Guest
+    func pass() throws -> Guest
 
-}
-
-protocol Swipe {
-    var guest: Guest { get }
-    
-    func checkAccess(guest: Guest) throws
 }
 
 class GuestType: Guest {
@@ -67,10 +62,11 @@ class GuestType: Guest {
     var entrantType: EntrantType = .classicGuest
     var areaAccess: [AreaAccess] = [.amusementPark]
     var rideAccess: [RideAccess] = [.allRides]
-    var discount: [Discount] = [.food(0), .merchandise(0)]
+    var foodDiscount = 0
+    var merchandiseDiscount = 0
     
-    func createPass() throws -> Guest {
-        print("Welcome to the Park!\nPark Pass: \(self.entrantType) \nPark Access: \(self.areaAccess) \nRide Access: \(self.discount) /nDiscounts: \(self.discount)")
+    func pass() throws -> Guest {
+        print("Welcome to the Park!\nPark Pass: \(self.entrantType.rawValue)")
         return self
     }
 }
@@ -80,23 +76,17 @@ class ClassicGuest: GuestType {
         super.init()
     }
     
-    /*override func createPass() throws -> Guest {
-        let guestPass = ClassicGuest()
-        return guestPass
-    }*/
 }
 
 class VIPGuest: GuestType {
     override init() {
         super.init()
         rideAccess.append(.skipAllLines)
-        discount = [.food(10), .merchandise(20)]
         entrantType = .vipGuest
+        foodDiscount = 10
+        merchandiseDiscount = 20
     }
-    /*override func createPass() throws -> Guest {
-        let guestPass = VIPGuest()
-        return guestPass
-    }*/
+
 }
 
 class FreeChildGuest: GuestType {
@@ -117,12 +107,12 @@ class FreeChildGuest: GuestType {
         }
     }
     
-    override func createPass() throws -> Guest {
+    override func pass() throws -> Guest {
         let childPass = FreeChildGuest(age: self.age)
         let isFree = checkAge()
         if isFree == true {
             let guestPass = childPass
-            print("Welcome to the Park!\nPark Pass: \(self.entrantType) \nPark Access: \(self.areaAccess) \nRide Access: \(self.discount) /nDiscounts: \(self.discount)")
+            print("Welcome to the Park!\nPark Pass: \(self.entrantType.rawValue)")
             return guestPass
         } else {
             throw GuestError.ageRequirementNotMet(Description: "Sorry, your child is above the allowed age")
@@ -136,7 +126,9 @@ class EmployeeType: Guest {
     var entrantType: EntrantType = .foodService
     var areaAccess: [AreaAccess] = [.amusementPark]
     var rideAccess: [RideAccess] = [.allRides]
-    var discount: [Discount] = [.food(15), .merchandise(25)]
+    var foodDiscount: Int = 15
+    var merchandiseDiscount: Int = 25
+    
     var firstName: String
     var lastName: String
     var address: String
@@ -153,7 +145,7 @@ class EmployeeType: Guest {
         self.zipCode = zipCode
     }
     
-    func createPass() throws -> Guest {
+    func pass() throws -> Guest {
         guard firstName != "" else {
             throw GuestError.invalidFirstName(Description: "Please provide a first name.")
         }
@@ -172,7 +164,7 @@ class EmployeeType: Guest {
         guard zipCode != "" else {
             throw GuestError.invalidZipCode(Description: "Please provide a zip code")
         }
-        print("Welcome to the Park \(self.firstName)!\nPark Pass: \(self.entrantType) \nPark Access: \(self.areaAccess) \nRide Access: \(self.discount) /nDiscounts: \(self.discount)")
+        print("Welcome to the Park \(self.firstName)!\nPark Pass: \(self.entrantType.rawValue)")
         return self
     }
 }

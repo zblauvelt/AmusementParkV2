@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		145647F81FEC862600479612 /* AmusementPark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145647F71FEC862600479612 /* AmusementPark.swift */; };
+		145647FA1FEE1D6F00479612 /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145647F91FEE1D6F00479612 /* Swipe.swift */; };
 		3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */; };
 		3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADCA1DF9B85E00A2B931 /* ViewController.swift */; };
 		3A8AADCE1DF9B85E00A2B931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A8AADCC1DF9B85E00A2B931 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		145647F71FEC862600479612 /* AmusementPark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmusementPark.swift; sourceTree = "<group>"; };
+		145647F91FEE1D6F00479612 /* Swipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
 		3A8AADC51DF9B85E00A2B931 /* SingleViewAppSwiftTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleViewAppSwiftTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A8AADCA1DF9B85E00A2B931 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				3A8AADD11DF9B85E00A2B931 /* LaunchScreen.storyboard */,
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
 				145647F71FEC862600479612 /* AmusementPark.swift */,
+				145647F91FEE1D6F00479612 /* Swipe.swift */,
 			);
 			path = SingleViewAppSwiftTemplate;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
+				145647FA1FEE1D6F00479612 /* Swipe.swift in Sources */,
 				145647F81FEC862600479612 /* AmusementPark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
